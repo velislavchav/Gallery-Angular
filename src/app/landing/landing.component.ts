@@ -33,5 +33,4 @@ export class LandingComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     clearInterval(this.slideshow)
   }
-
 }

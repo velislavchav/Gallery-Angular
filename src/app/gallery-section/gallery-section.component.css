@@ -1,0 +1,10 @@
+.gallery-container {
+    padding: 1% 0 !important;
+    margin: 0 !important;
+    width: 100%;
+}
+
+.display-center {
+    margin: 5px 0 !important;
+    padding: 0 5px !important;
+}

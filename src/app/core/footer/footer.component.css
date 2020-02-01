@@ -1,0 +1,22 @@
+#container {
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight:700; 
+    width: 100%;
+    color:rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 1);
+    text-align: center;
+    display: block;
+    /* animation-name: footerAnimation;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate; */
+}
+
+
+/* @keyframes footerAnimation {
+    from { color: #FFFFFFFF;
+    background-color: rgba(0,0,0,1);}
+    to { color: #000000FF;
+        background-color: #FFFFFFFF;}
+  } */

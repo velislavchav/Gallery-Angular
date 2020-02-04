@@ -13,6 +13,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { GallerySectionComponent } from './gallery-section/gallery-section.component';
 import { BlogSectionComponent } from './blog-section/blog-section.component';
 import { EventsSectionComponent } from './events-section/events-section.component';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EventsSectionComponent } from './events-section/events-section.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent]

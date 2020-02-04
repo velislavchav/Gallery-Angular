@@ -1,8 +1,12 @@
+import { environment } from '../environments/environment';
+
 // Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 // Components
 import { AppComponent } from './app.component';
@@ -15,6 +19,10 @@ import { BlogSectionComponent } from './blog-section/blog-section.component';
 import { EventsSectionComponent } from './events-section/events-section.component';
 import { UserModule } from './user/user.module';
 
+// Services
+import { BlogService } from './services/blog.service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,15 +32,17 @@ import { UserModule } from './user/user.module';
     NotFoundComponent,
     GallerySectionComponent,
     BlogSectionComponent,
-    EventsSectionComponent
+    EventsSectionComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    UserModule
+    UserModule,
+    AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
   ],
-  providers: [],
+  providers: [BlogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

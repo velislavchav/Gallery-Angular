@@ -1,6 +1,6 @@
-import { BlogService } from './../services/blog.service';
+import { BlogService } from '../../services/blog.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IBlog } from '../interfaces/IBlog';
+import { IBlog } from '../../interfaces/IBlog';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class BlogSectionComponent implements OnInit, OnDestroy {
   blogs: Array<IBlog>;
   private subscription: Subscription;
+  
   constructor(private blogService: BlogService) {}
 
   ngOnInit() {

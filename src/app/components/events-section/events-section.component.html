@@ -1,4 +1,5 @@
-<div class="card-deck events-container">
+<ng-template [ngIf]="events">
+  <div class="card-deck events-container">
   <!-- start -->
   <div class="card h-100" *ngFor="let event of events">
     <div class="imageContainer" [ngStyle]="{'background-image':'url(' + event.imageUrl + ')'}"></div>
@@ -12,4 +13,6 @@
   </div>
   <!-- end -->
 </div>
+</ng-template>
+
 

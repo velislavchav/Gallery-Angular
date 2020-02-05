@@ -10,17 +10,19 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 // Components
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './core/navigation/navigation.component';
-import { LandingComponent } from './landing/landing.component';
-import { FooterComponent } from './core/footer/footer.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { GallerySectionComponent } from './gallery-section/gallery-section.component';
-import { BlogSectionComponent } from './blog-section/blog-section.component';
-import { EventsSectionComponent } from './events-section/events-section.component';
-import { UserModule } from './user/user.module';
+import { NavigationComponent } from './components/core/navigation/navigation.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { FooterComponent } from './components/core/footer/footer.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { GallerySectionComponent } from './components/gallery-section/gallery-section.component';
+import { BlogSectionComponent } from './components/blogs-section/blog-section.component';
+import { EventsSectionComponent } from './components/events-section/events-section.component';
+import { UserModule } from './components/user/user.module';
 
 // Services
-import { BlogService } from './services/blog.service';
+import { SingleBlogResolver } from './services/resolvers/single-blog.resolver';
+import { SingleBlogComponent } from './components/single-blog/single-blog.component';
+// import { BlogsSectionResolver } from './services/resolvers/blogs-section.resolver';
 
 
 @NgModule({
@@ -33,6 +35,7 @@ import { BlogService } from './services/blog.service';
     GallerySectionComponent,
     BlogSectionComponent,
     EventsSectionComponent,
+    SingleBlogComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,7 @@ import { BlogService } from './services/blog.service';
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
   ],
-  providers: [BlogService],
+  providers: [SingleBlogResolver],   //BlogsSectionResolver
   bootstrap: [AppComponent]
 })
 export class AppModule { }

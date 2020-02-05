@@ -1,13 +1,16 @@
-import { ProfileComponent } from './user/profile/profile.component';
-import { LoginComponent } from './user/login/login.component';
-import { RegisterComponent } from './user/register/register.component';
-import { EventsSectionComponent } from './events-section/events-section.component';
-import { BlogSectionComponent } from './blog-section/blog-section.component';
-import { GallerySectionComponent } from './gallery-section/gallery-section.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { LandingComponent } from './landing/landing.component';
+import { ProfileComponent } from './components/user/profile/profile.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { RegisterComponent } from './components/user/register/register.component';
+import { EventsSectionComponent } from './components/events-section/events-section.component';
+import { BlogSectionComponent } from './components/blogs-section/blog-section.component';
+import { GallerySectionComponent } from './components/gallery-section/gallery-section.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { LandingComponent } from './components/landing/landing.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { SingleBlogResolver } from './services/resolvers/single-blog.resolver';
+import { SingleBlogComponent } from './components/single-blog/single-blog.component';
+// import { BlogsSectionResolver } from './services/resolvers/blogs-section.resolver';
 
 
 const routes: Routes = [
@@ -42,7 +45,17 @@ const routes: Routes = [
   },
   {
     path: 'section/blog',
-    component: BlogSectionComponent
+    component: BlogSectionComponent,
+    // resolve: {
+    //   blogsIncoming: BlogsSectionResolver
+    // }
+  },
+  {
+    path: 'blog/:id',
+    component: SingleBlogComponent,
+    resolve: { 
+      singleBlog: SingleBlogResolver
+    }
   },
   {
     path: '**',

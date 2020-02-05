@@ -10,7 +10,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SingleBlogResolver } from './services/resolvers/single-blog.resolver';
 import { SingleBlogComponent } from './components/single-blog/single-blog.component';
-// import { BlogsSectionResolver } from './services/resolvers/blogs-section.resolver';
+import { BlogsResolver } from './services/resolvers/blogs-section.resolver';
 
 
 const routes: Routes = [
@@ -46,9 +46,9 @@ const routes: Routes = [
   {
     path: 'section/blog',
     component: BlogSectionComponent,
-    // resolve: {
-    //   blogsIncoming: BlogsSectionResolver
-    // }
+    resolve: {
+      blogsData: BlogsResolver
+    }
   },
   {
     path: 'blog/:id',

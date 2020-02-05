@@ -10,7 +10,7 @@ import { BlogService } from 'src/app/services/blog.service';
 })
 export class SingleBlogComponent implements OnInit {
   blog: IBlog;
-  constructor(private route: ActivatedRoute, private blogService: BlogService) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.blog = this.route.snapshot.data['singleBlog'];

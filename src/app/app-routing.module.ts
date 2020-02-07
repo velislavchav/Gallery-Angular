@@ -11,6 +11,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SingleBlogResolver } from './services/resolvers/single-blog.resolver';
 import { SingleBlogComponent } from './components/single-blog/single-blog.component';
 import { BlogsResolver } from './services/resolvers/blogs-section.resolver';
+import { GalleryResolver } from './services/resolvers/gallery-section.resolver';
 
 
 const routes: Routes = [
@@ -37,7 +38,10 @@ const routes: Routes = [
   },
   {
     path: 'section/gallery',
-    component: GallerySectionComponent
+    component: GallerySectionComponent,
+    resolve: {
+      galleryData: GalleryResolver
+    }
   },
   {
     path: 'section/events',

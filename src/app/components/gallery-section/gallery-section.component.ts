@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IPhoto } from 'src/app/interfaces/IPhoto';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-gallery-section',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gallery-section.component.css']
 })
 export class GallerySectionComponent implements OnInit {
-
-  constructor() { }
+  gallery: Array<IPhoto>;
+  constructor(public route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.gallery = this.route.snapshot.data['galleryData'];
   }
 
 }

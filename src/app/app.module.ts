@@ -20,9 +20,8 @@ import { EventsSectionComponent } from './components/events-section/events-secti
 import { UserModule } from './components/user/user.module';
 
 // Services
-// import { SingleBlogResolver } from './services/resolvers/single-blog.resolver';
 import { SingleBlogComponent } from './components/single-blog/single-blog.component';
-// import { BlogsResolver } from './services/resolvers/blogs-section.resolver';
+// import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -44,6 +43,7 @@ import { SingleBlogComponent } from './components/single-blog/single-blog.compon
     UserModule,
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    // ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

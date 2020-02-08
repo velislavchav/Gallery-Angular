@@ -4,7 +4,7 @@
             <div class="card-heading"></div>
             <div class="card-body">
                 <h2 class="title"> Login</h2>
-                <form method="POST" [formGroup]="loginForm">
+                <form method="POST" [formGroup]="loginForm" (ngSubmit)="tryLogin()">
                     <div class="input-group">
                         <input class="input--style-3" type="email" placeholder="Email" formControlName="email">
                     </div>
@@ -12,7 +12,7 @@
                         <input class="input--style-3" type="password" placeholder="Password" formControlName="password">
                     </div>
                     <div class="p-t-10">
-                        <button class="btn btn--pill btn--green">Submit</button>
+                        <button class="btn btn--pill btn--green" type="submit" [disabled]="loginForm.invalid">Submit</button>
                     </div>
                 </form>
             </div>

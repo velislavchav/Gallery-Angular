@@ -22,8 +22,8 @@ import { LoaderComponent } from './components/others/loader/loader.component';
 import { SharedFormsModule } from './components/forms/shared-forms.module';
 import { SectionModule } from './components/sections/sections.module';
 import { SinglePhotoComponent } from './components/chosen-component/single-photo/single-photo.component';
-
-
+import { AuthService } from './services/auth.service';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -43,10 +43,11 @@ import { SinglePhotoComponent } from './components/chosen-component/single-photo
     UserModule,
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     SharedFormsModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

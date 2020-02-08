@@ -1,3 +1,8 @@
+<!-- <ng-template [ngIf]="!blogs">
+  <app-loader></app-loader>
+</ng-template> -->
+
+<ng-template [ngIf]="blogs">
 <div class="container">
   <div class="text-center">
     <h1>Blog</h1>
@@ -5,7 +10,7 @@
   <div class="container">
     <div class="card-columns">
       <div class="card" *ngFor="let blog of blogs">
-        <a routerLink="/blog/{{blog.id}}">
+        <a routerLink="/section/blog/{{blog.id}}">
           <img class="card-img-top" src="{{blog.imageUrl}}" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{ blog.title }}</h5>
@@ -21,3 +26,4 @@
     </div>
   </div>
 </div>
+</ng-template>

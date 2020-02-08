@@ -14,36 +14,35 @@ import { NavigationComponent } from './components/core/navigation/navigation.com
 import { LandingComponent } from './components/landing/landing.component';
 import { FooterComponent } from './components/core/footer/footer.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { GallerySectionComponent } from './components/gallery-section/gallery-section.component';
-import { BlogSectionComponent } from './components/blogs-section/blog-section.component';
-import { EventsSectionComponent } from './components/events-section/events-section.component';
 import { UserModule } from './components/user/user.module';
 
 // Services
 import { SingleBlogComponent } from './components/single-blog/single-blog.component';
-// import { ReactiveFormsModule } from '@angular/forms';
+import { LoaderComponent } from './components/loader/loader.component';
+import { SharedFormsModule } from './components/forms/shared-forms.module';
+import { SectionModule } from './components/sections/sections.module';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
-    LandingComponent,
+    NavigationComponent, //
     FooterComponent,
-    NotFoundComponent,
-    GallerySectionComponent,
-    BlogSectionComponent,
-    EventsSectionComponent,
+    LandingComponent,
     SingleBlogComponent,
+    NotFoundComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     NgbModule,
+    SectionModule,
     UserModule,
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-    // ReactiveFormsModule
+    SharedFormsModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

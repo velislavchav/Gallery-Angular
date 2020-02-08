@@ -1,6 +1,6 @@
-import { BlogService } from '../../services/blog.service';
+import { BlogService } from '../../../services/blog.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IBlog } from '../../interfaces/IBlog';
+import { IBlog } from '../../../interfaces/IBlog';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,20 +11,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BlogSectionComponent implements OnInit, OnDestroy {
   blogs: Array<IBlog>;
-  // private subscription: Subscription;
+  private subscription: Subscription;
 
   constructor(public route: ActivatedRoute, private blogService: BlogService) {}
 
   ngOnInit() {
-    this.blogs = this.route.snapshot.data['blogsData']
-    // this.subscription = this.blogService.loadBlogs()
-      // .subscribe(data =>
-      //   this.blogs = data
-      // )
+    this.subscription = this.blogService.loadBlogs().subscribe(data => {
+      this.blogs = data
+    });
   }
 
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
-
 }

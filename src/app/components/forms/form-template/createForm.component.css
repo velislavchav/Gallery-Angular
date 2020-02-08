@@ -506,3 +506,11 @@
           padding-bottom: 50px;
       }
   }
+
+  /* Text-area */
+
+  textarea {
+      width: 100%;
+      height: auto;
+      text-align: center;
+  }

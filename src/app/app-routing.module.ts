@@ -1,4 +1,4 @@
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotFoundComponent } from './components/others/not-found/not-found.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';

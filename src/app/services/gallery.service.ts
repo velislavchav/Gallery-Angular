@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { IPhoto } from '../interfaces/IPhoto'
 
@@ -8,7 +8,12 @@ import { IPhoto } from '../interfaces/IPhoto'
   providedIn: 'root'
 })
 export class GalleryService {
-  constructor(public db: AngularFirestore) { }
+  galleryCollection: AngularFirestoreCollection<IPhoto>;
+
+  constructor(public db: AngularFirestore) {
+    this.galleryCollection = this.db.collection('gallery');
+   }
+
   loadGallery() {
     return this.db.collection('gallery').snapshotChanges().pipe(
       map(changes => {
@@ -19,5 +24,20 @@ export class GalleryService {
         })
       }),
     )
+  }
+
+  loadPhoto(id: string) {
+    return this.db.collection('gallery').doc(id).ref.get()
+    .then(doc => {
+      return doc.data() as IPhoto;
+    })
+  }
+
+  addPhoto(photo: IPhoto) {
+    this.galleryCollection.add(photo);
+  }
+
+  deletePhoto() {
+
   }
 }

@@ -1,6 +1,6 @@
 .imageContainer {
     width: 100%;
-    height: 70vh;
+    height: 50vh;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -8,12 +8,11 @@
 
 .imageContainer:hover {
     filter: brightness(0.4);
-    height: 72vh;
+    height: 51vh;
 }
 
 .events-container {
     margin: 3% 0;
-    
 }
 
 .card {

@@ -10,8 +10,7 @@
     <div class="container">
       <div class="card-columns">
         <div class="card md-4" *ngFor="let photo of gallery">
-          <!-- <a routerLink="/gallery/{{gallery.id}}"> -->
-            <a routerLink="/gallery/">
+          <a routerLink="/section/gallery/{{photo.id}}">
             <img class="card-img-top" src="{{photo.imageUrl}}" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{ photo.title }}</h5>

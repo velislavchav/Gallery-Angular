@@ -5,6 +5,6 @@ export interface IPhoto {
     imageUrl: string;
     author: string;
     likes: number;
-    category: Array<string>;
+    category: string;
     likedBy: Array<string>;
 }

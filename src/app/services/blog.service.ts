@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { IBlog } from '../interfaces/IBlog';
-import { map, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService {
-  constructor(public db: AngularFirestore) { }
+  blogsCollection: AngularFirestoreCollection<IBlog>;
 
+  constructor(public db: AngularFirestore) {
+    this.blogsCollection = this.db.collection('blogs');
+   }
   loadBlogs() {
     return this.db.collection('blogs').snapshotChanges().pipe(
       map(changes => {
@@ -28,6 +29,10 @@ export class BlogService {
     .then(doc => {
       return doc.data() as IBlog;
     })
+  }
+
+  addBlog(blog: IBlog) {
+    this.blogsCollection.add(blog);
   }
 }
 

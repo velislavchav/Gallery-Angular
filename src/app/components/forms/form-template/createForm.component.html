@@ -2,42 +2,41 @@
     <div class="wrapper wrapper--w790">
         <div class="card card-5">
             <div class="card-heading">
-                <h2 class="title">Create Photo Form</h2>
+                <h2 class="title"> {{ title }}</h2>
             </div>
             <div class="card-body">
-                <form method="POST" [formGroup]="form">
+                <form (ngSubmit)="onSubmit()" [formGroup]="form">
                     <div class="form-row">
                         <div class="value">
                             <div class="input-group">
-                                <input class="input--style-5" placeholder="Title" type="text" name="title">
+                                <input class="input--style-5" placeholder="Title" type="text" formControlName="title">
                             </div>
                         </div>
                     </div>
                     <div class="form-row">
-                        <select class="select-css">
-                            <option>This is a native select element</option>
-                            <option>Apples</option>
-                            <option>Bananas</option>
-                            <option>Grapes</option>
-                            <option>Oranges</option>
+                        <select class="select-css" formControlName="category">
+                            <option *ngFor="let cat of categories"> {{ cat }} </option>
                         </select>
                     </div>
                     <div class="form-row">
                         <div class="value">
                             <div class="input-group">
-                                <input class="input--style-5" placeholder="Image address" type="text" name="image">
+                                <input class="input--style-5" placeholder="Image address" type="text"
+                                    formControlName="imageUrl">
                             </div>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="value">
                             <div class="input-group">
-                                <input class="input--style-5" placeholder="description" type="text" name="description">
+                                <input class="input--style-5" placeholder="Description" type="text"
+                                    formControlName="description">
                             </div>
                         </div>
                     </div>
                     <div>
-                        <button class="btn btn--radius-2 btn--red" type="submit"> Create </button>
+                        <button class="btn btn--radius-2 btn--red" type="submit" [disabled]="!form.valid"> Create
+                        </button>
                     </div>
                 </form>
             </div>

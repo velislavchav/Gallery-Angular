@@ -13,14 +13,15 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/core/navigation/navigation.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { FooterComponent } from './components/core/footer/footer.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotFoundComponent } from './components/others/not-found/not-found.component';
 import { UserModule } from './components/user/user.module';
 
 // Services
-import { SingleBlogComponent } from './components/single-blog/single-blog.component';
-import { LoaderComponent } from './components/loader/loader.component';
+import { SingleBlogComponent } from './components/chosen-component/single-blog/single-blog.component';
+import { LoaderComponent } from './components/others/loader/loader.component';
 import { SharedFormsModule } from './components/forms/shared-forms.module';
 import { SectionModule } from './components/sections/sections.module';
+import { SinglePhotoComponent } from './components/chosen-component/single-photo/single-photo.component';
 
 
 
@@ -33,6 +34,7 @@ import { SectionModule } from './components/sections/sections.module';
     SingleBlogComponent,
     NotFoundComponent,
     LoaderComponent,
+    SinglePhotoComponent,
   ],
   imports: [
     BrowserModule,

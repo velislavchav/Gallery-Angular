@@ -19,19 +19,17 @@ export class LoginComponent {
   }
 
   tryLogin() {
-    const data = {
-      email: this.loginForm.value.email,
-      password: this.loginForm.value.password
-    }
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
 
-    this.authService.doLogin(data)
-    .then(data =>
-      // this.isValidLogin = true
-      // this.isLogged = data.user.uid
-      console.log(data)
-    ).catch(err => {
-      this.isValidLogin = false;
-    });
+    this.authService.signIn(email, password);
+      // .then(data =>
+      //   // this.isValidLogin = true
+      //   // this.isLogged = data.user.uid
+      //   console.log(data)
+      // ).catch(err => {
+      //   this.isValidLogin = false;
+      // });
   }
 
 }

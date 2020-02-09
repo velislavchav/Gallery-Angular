@@ -24,10 +24,8 @@ export class RegisterComponent {
   }
 
   tryRegister() {
-    const data = {
-      email: this.registerForm.value.email,
-      password: this.registerForm.value.passwords.password
-    }
-    this.authService.doRegister(data);
+    const email = this.registerForm.value.email;
+    const password = this.registerForm.value.passwords.password;
+    this.authService.signUp(email, password);
   }
 }

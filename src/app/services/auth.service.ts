@@ -1,34 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
-import * as firebase from 'firebase/app';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { IUser } from '../interfaces/IUser';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // user: null; 
-  // constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth, private router: Router) {}
-
-  // doRegister(data){
-  //   return new Promise<any>((resolve, reject) => {
-  //     firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
-  //     .then(res => {
-  //       resolve(res);
-  //     }, err => reject(err))
-  //   })
-  // }
-
-  // doLogin(data) {
-  //   return this.afAuth.auth.signInWithEmailAndPassword(data.email, data.password); 
-  // }
-
   private _isAuth = false;
  
   isAuthChanged = new Subject<boolean>();
@@ -36,7 +18,7 @@ export class AuthService {
     private dbAuth: AngularFireAuth,
     private afDb: AngularFirestore,
     private router: Router,
-    // private toastr: ToastrService
+    private toastr: ToastrService
   ) {}
  
   get isAuth(){
@@ -60,12 +42,11 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(data => {
         // this.pushUserData({email, name, mobile});
-        // this.toastr.success("Successfully registered!", "Success", ToastrConfig);
-        this.router.navigate(["/"]);
-        console.log(data);
+        this.toastr.success("Successfully registered!", "Success");
+        this.router.navigate(["/user/login"]);
       })
       .catch(err => {
-        // this.toastr.error(err, "Error", ToastrConfig);
+        this.toastr.error(err, "Error");
       });
   }
  
@@ -73,14 +54,14 @@ export class AuthService {
     this.dbAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then(data => {
-        this.initializeAuthState(); //
         localStorage.setItem('email', data.user.email);
-        // this.toastr.success("Successfully logged in!", "Success", ToastrConfig);
+        this.toastr.success("Successfully logged in!", "Success");
         this.router.navigate(["/"]);
-        console.log(data);
+        // console.log(data);
+        this.initializeAuthState();
       })
       .catch(err => {
-        // this.toastr.error(err, "Error", ToastrConfig);
+        this.toastr.error(err, "Error");
       });
   }
  
@@ -116,11 +97,11 @@ export class AuthService {
     this.dbAuth.auth.signOut()
     .then(() => {
       localStorage.clear();
-      // this.toastr.success("Successfully logged out!", "Success", ToastrConfig);
+      this.toastr.success("Successfully logged out!", "Success");
       this.router.navigate(["/home"]);
     })
     .catch(err => {
-      // this.toastr.error(err, "Error", ToastrConfig);
+      this.toastr.error(err, "Error");
     });
   }
  

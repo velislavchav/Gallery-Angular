@@ -8,15 +8,15 @@
         </div>
         <div id="mainListDiv" class="main_list">
             <ul class="navlinks">
-                <li *ngIf="isLoggedIn"><a routerLink="/section/gallery"> Gallery </a></li>
+                <li *ngIf="isAuth"><a routerLink="/section/gallery"> Gallery </a></li>
                 <li><a routerLink="/section/blog">Blog</a></li>
-                <li *ngIf="isLoggedIn"><a routerLink="/section/events">Events</a></li>
-                <li *ngIf="!isLoggedIn"><a routerLink="/user/register">Register</a></li>
-                <li *ngIf="!isLoggedIn"><a routerLink="/user/login">Login</a></li>
-                <li *ngIf="isLoggedIn"><a routerLink="/user/profile">Profile</a></li>
-                <li *ngIf="isLoggedIn"><a routerLink="/user/logout">Logout</a></li>
-                <li *ngIf="isLoggedIn"><a routerLink="/create/photo">Create photo</a></li>
-                <li *ngIf="isLoggedIn"><a routerLink="/create/blog">Create blog</a></li>
+                <li *ngIf="isAuth"><a routerLink="/section/events">Events</a></li>
+                <li *ngIf="!isAuth"><a routerLink="/user/register">Register</a></li>
+                <li *ngIf="!isAuth"><a routerLink="/user/login">Login</a></li>
+                <li *ngIf="isAuth"><a routerLink="/user/profile">Profile</a></li>
+                <li *ngIf="isAuth"><a type="button" (click)="tryLogout()">Logout</a></li>
+                <li *ngIf="isAuth"><a routerLink="/create/photo">Create photo</a></li>
+                <li *ngIf="isAuth"><a routerLink="/create/blog">Create blog</a></li>
                 <!-- <li><a routerLink="/about">About us</a></li> -->
             </ul>
         </div>

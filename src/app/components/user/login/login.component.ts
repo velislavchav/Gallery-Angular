@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,13 +24,6 @@ export class LoginComponent {
     const password = this.loginForm.value.password;
 
     this.authService.signIn(email, password);
-      // .then(data =>
-      //   // this.isValidLogin = true
-      //   // this.isLogged = data.user.uid
-      //   console.log(data)
-      // ).catch(err => {
-      //   this.isValidLogin = false;
-      // });
   }
 
 }

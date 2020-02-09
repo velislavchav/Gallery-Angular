@@ -7,7 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+ 
 // Components
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/core/navigation/navigation.component';
@@ -46,6 +48,13 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     SharedFormsModule,
     AppRoutingModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressBar: true,
+    }) // ToastrModule added
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

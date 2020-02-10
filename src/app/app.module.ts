@@ -24,8 +24,8 @@ import { LoaderComponent } from './components/others/loader/loader.component';
 import { SharedFormsModule } from './components/forms/shared-forms.module';
 import { SectionModule } from './components/sections/sections.module';
 import { SinglePhotoComponent } from './components/chosen-component/single-photo/single-photo.component';
-import { AuthService } from './services/auth.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AuthGuard } from './services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -54,9 +54,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
       progressBar: true,
-    }) // ToastrModule added
+    }), // ToastrModule added
   ],
-  providers: [AuthService],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

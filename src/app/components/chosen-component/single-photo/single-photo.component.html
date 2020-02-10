@@ -1,26 +1,38 @@
 <ng-template [ngIf]="!photo">
-    <app-loader></app-loader>
-  </ng-template>
-  
-  <ng-template [ngIf]="photo">
-    <!-- Page Content -->
-    <div class="container">
-      <!-- Row -->
-      <h1 class="font-weight-light text-center mt-3 title"> {{ photo.title }}</h1>
-      <div class="row my-2">
-        <div class="col-lg-9">
-          <img class="img-fluid rounded" src="{{photo.imageUrl}}" alt="image">
-        </div>
-        <div class="my-5 py-4 text-center col-lg-3 body-card">
-            <h5 class="py-2"> Description: </h5>
-            <p> {{photo.description}} </p>
-            <small class="text-secondary">photo by {{photo.author}}</small>
-        </div>
+  <app-loader></app-loader>
+</ng-template>
+
+<ng-template [ngIf]="photo">
+  <!-- Page Content -->
+  <div class="container">
+    <!-- Row -->
+    <h1 class="font-weight-light text-center mt-3 title"> {{ photo.title }}</h1>
+    <div class="row my-2">
+      <div class="col-lg-9">
+        <img class="img-fluid rounded" src="{{photo.imageUrl}}" alt="image">
       </div>
-      <!-- /.row -->
-      <div class="text-center">
-        <a class="btn btn-primary btn-lg btn-block" routerLink="/section/gallery"> Back to gallery section! </a>
+      <div class="my-5 py-4 text-center col-lg-3 body-card">
+        <h5 class="py-2"> Description: </h5>
+        <p> {{photo.description}} </p>
+        <small class="text-secondary">photo by {{photo.author}}</small>
       </div>
-    </div> 
-    <!-- /.container -->
-  </ng-template>
+    </div>
+    <!-- isUserCreator buttons -->
+    <div class="row my-3" *ngIf="isUserCreator">
+      <div class="col-lg-6 text-center">
+        <button class="btn btn-danger btn-block" (click)="delete()"> Delete photo! </button>
+      </div>
+      <div class="col-lg-6 text-center">
+        <button class="btn btn-warning btn-block" (click)="edit()"> Edit photo! </button>
+      </div>
+    </div>
+    <!-- /isUserCreator buttons -->
+    <!-- /.row -->
+    <div class="row my-3">
+      <div class="text-center col-lg-12">
+        <button class="btn btn-primary btn-lg btn-block" routerLink="/section/gallery"> Back to gallery section! </button>
+      </div>
+    </div>
+  </div>
+  <!-- /.container -->
+</ng-template>

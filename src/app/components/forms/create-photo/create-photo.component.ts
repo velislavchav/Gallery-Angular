@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GalleryService } from 'src/app/services/gallery.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-create-photo',
@@ -14,7 +15,7 @@ export class CreatePhotoComponent {
 
 
   form: FormGroup;
-  constructor(private fb: FormBuilder, private galleryService: GalleryService, private router: Router) {
+  constructor(private fb: FormBuilder, private galleryService: GalleryService, private router: Router, private authService: AuthService) {
     this.form = fb.group({
       title: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(3)]],
       category: [this.categories[0], [Validators.required]],
@@ -24,10 +25,10 @@ export class CreatePhotoComponent {
   }
 
   onSubmit() {
-    this.form.value['author'] = 'admin';
+    const userId = this.authService.getUserId(); 
+    this.form.value['author'] = userId;
     this.form.value['likedBy'] = [];
     this.form.value['likes'] = 0;
-
     this.galleryService.addPhoto(this.form.value);
     this.router.navigate(['/section',  'gallery']);
   }

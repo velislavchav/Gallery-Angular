@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
-import { IPhoto } from '../interfaces/IPhoto'
+import { IPhoto } from '../interfaces/IPhoto';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Injectable({
@@ -10,9 +12,9 @@ import { IPhoto } from '../interfaces/IPhoto'
 export class GalleryService {
   galleryCollection: AngularFirestoreCollection<IPhoto>;
 
-  constructor(public db: AngularFirestore) {
+  constructor(public db: AngularFirestore, private toastr: ToastrService) {
     this.galleryCollection = this.db.collection('gallery');
-   }
+  }
 
   loadGallery() {
     return this.db.collection('gallery').snapshotChanges().pipe(
@@ -28,13 +30,19 @@ export class GalleryService {
 
   loadPhoto(id: string) {
     return this.db.collection('gallery').doc(id).ref.get()
-    .then(doc => {
-      return doc.data() as IPhoto;
-    })
+      .then(doc => {
+        return doc.data() as IPhoto;
+      })
   }
 
   addPhoto(photo: IPhoto) {
-    this.galleryCollection.add(photo);
+    try {
+      this.galleryCollection.add(photo);
+      this.toastr.success("Successfully created!", "Success");
+    } catch (error) {
+      this.toastr.error(error, "Error");
+    }
+
   }
 
   deletePhoto() {

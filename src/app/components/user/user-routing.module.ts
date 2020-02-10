@@ -2,6 +2,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from 'src/app/services/auth.guard';
 
 const userRoutes: Routes = [
     {
@@ -9,15 +10,16 @@ const userRoutes: Routes = [
         children: [
             {
                 path: 'register',
-                component: RegisterComponent
+                component: RegisterComponent,
             },
             {
                 path: 'login',
-                component: LoginComponent
+                component: LoginComponent,
             },
             {
                 path: 'profile',
-                component: ProfileComponent
+                component: ProfileComponent,
+                canActivate: [AuthGuard]
             }]
     }
 ];

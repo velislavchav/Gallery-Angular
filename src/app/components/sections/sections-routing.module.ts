@@ -4,10 +4,12 @@ import { EventsSectionComponent } from './events-section/events-section.componen
 import { BlogSectionComponent } from './blogs-section/blog-section.component';
 import { SingleBlogComponent } from '../chosen-component/single-blog/single-blog.component';
 import { SinglePhotoComponent } from '../chosen-component/single-photo/single-photo.component';
+import { AuthGuard } from 'src/app/services/auth.guard';
 
 const sectionRoutes: Routes = [
     {
         path: 'section',
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'gallery',
@@ -15,7 +17,7 @@ const sectionRoutes: Routes = [
             },
             {
                 path: 'events',
-                component: EventsSectionComponent
+                component: EventsSectionComponent,
             },
             {
                 path: 'blog',

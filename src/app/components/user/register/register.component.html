@@ -4,13 +4,16 @@
             <div class="card-body">
                 <h2 class="title">Registration</h2>
                 <form (ngSubmit)="tryRegister()" [formGroup]="registerForm">
+                    <div class="input-group">
+                        <input class="input--style-3" type="text" placeholder="Full Name" formControlName="name">
+                    </div>
                     <div>
                         <div class="input-group">
                             <input class="input--style-3" type="email" placeholder="Email" formControlName="email">
                         </div>
-                        <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">
+                        <!-- <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">
                             <strong>Warning!</strong> Valid email is required.
-                        </div>
+                        </div> -->
                     </div>
                     <div formGroupName="passwords">
                         <div class="input-group">
@@ -19,11 +22,14 @@
                         </div>
                         <div class="input-group">
                             <input class="input--style-3" type="password" placeholder="Re-password"
-                                formControlName="repeatPassword">
+                                formControlName="repeatPassword" (onTouch)="passwordsMatch()">
                         </div>
-                        <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="registerForm.get('passwords')?.errors?.passwordsMatch && registerForm.get('passwords').touched">
+                        <!-- <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="registerForm.get('passwords')?.errors?.passwordsMatch && registerForm.get('passwords').touched">
                             <strong>Warning!</strong> Passwords are not matched.
-                        </div>
+                        </div> -->
+                    </div>
+                    <div class="input-group">
+                        <input class="input--style-3" type="text" placeholder="Phone number" formControlName="phone">
                     </div>
                     <div class="p-t-10">
                         <button class="btn btn--pill btn--green" type="submit" [disabled]="registerForm.invalid">Submit</button>

@@ -18,12 +18,9 @@ export class BlogSectionComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.blogService.loadBlogs().subscribe(data => {
-      this.blogs = data;
-      data.forEach(blog => {
-        this.authService.getAuthorName(blog.author)
-      })
-      
-    });
+      this.blogs = data
+    }) 
+    
   }
 
   ngOnDestroy() {

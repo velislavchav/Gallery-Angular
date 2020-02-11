@@ -1,6 +1,6 @@
-<!-- <ng-template [ngIf]="!events">
-  <app-loader></app-loader>
-</ng-template> -->
+<ng-template [ngIf]="!events">
+  loading..
+</ng-template>
 
 <ng-template [ngIf]="events">
   <div class="card-deck events-container">
@@ -12,7 +12,14 @@
       <p class="card-text">{{ event.description }}</p>
     </div>
     <div class="card-footer text-center">
-      Date:  {{ event.date }}
+      {{ event.date }}
+    </div>
+    <div class="card-footer text-center" *ngIf="event.isUserAuthor">
+      <button class="btn btn-danger btn-block" (click)="delete(event)"> Delete event </button>
+    </div>
+    <div class="card-footer text-center" *ngIf="!event.isUserAuthor">
+      <button class="btn btn-success btn-block" *ngIf="!event.isUserEnrolledForThisCourse" (click)="enroll(event)"> Enroll for the event </button>
+      <button class="btn btn-warning btn-block" *ngIf="event.isUserEnrolledForThisCourse" (click)="unenroll(event)"> Unenroll for the event </button>
     </div>
   </div>
   <!-- end -->

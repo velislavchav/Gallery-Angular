@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { IPhoto } from '../interfaces/IPhoto';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 
@@ -11,8 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class GalleryService {
   galleryCollection: AngularFirestoreCollection<IPhoto>;
+  photoDoc: AngularFirestoreDocument<IPhoto>;
 
-  constructor(public db: AngularFirestore, private toastr: ToastrService) {
+  constructor(public db: AngularFirestore, private toastr: ToastrService, private router: Router) {
     this.galleryCollection = this.db.collection('gallery');
   }
 
@@ -45,7 +47,12 @@ export class GalleryService {
 
   }
 
-  deletePhoto() {
-
+  deletePhoto(photo: IPhoto) {
+    this.db.collection("gallery").doc(photo.id).delete().then(() => {
+      this.toastr.success('Successfully deleted photo', 'Success');
+      this.router.navigate(['/section/gallery']);
+    }).catch(err => {
+      this.toastr.success("Error removing document!" + err, 'Error')
+    });
   }
 }

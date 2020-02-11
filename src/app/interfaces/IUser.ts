@@ -3,5 +3,7 @@ export interface IUser {
     name: string;
     email: string;
     imageUrl?: string;
-    phone?: string;
+    phone: string;
+    likedPhotos: Array<string>;
+    enrolledEvents: Array<string>;
 }

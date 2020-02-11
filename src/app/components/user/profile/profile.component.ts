@@ -13,16 +13,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(private authService:AuthService) { }
 
   ngOnInit() {
-    const user_id = this.authService.getUserId();
-    this.subscriber = this.authService.getUser(user_id).subscribe(data => {
-      this.currentUser = data;
-      console.log(this.currentUser);
-      
-    });
+    // const user_id = this.authService.getUserId();
+    // this.subscriber = this.authService.getUser(user_id).subscribe(data => {
+    //   this.currentUser = data;
+    //   console.log(this.currentUser);
+    // });
   }
 
   ngOnDestroy() {
-    this.subscriber.unsubscribe();
+    if(this.subscriber) {
+      this.subscriber.unsubscribe();
+    }
   }
 
 }

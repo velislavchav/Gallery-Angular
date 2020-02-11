@@ -14,16 +14,23 @@
       <div class="my-5 py-4 text-center col-lg-3 body-card">
         <h5 class="py-2"> Description: </h5>
         <p> {{photo.description}} </p>
-        <small class="text-secondary">photo by {{photo.author}}</small>
+        <small class="text-secondary">photo by {{photo.author}}</small> <br>
+        <small class="text-secondary">{{photo.category}} category </small>
+
       </div>
     </div>
     <!-- isUserCreator buttons -->
     <div class="row my-3" *ngIf="isUserCreator">
       <div class="col-lg-6 text-center">
-        <button class="btn btn-danger btn-block" (click)="delete()"> Delete photo! </button>
+        <button class="btn btn-danger btn-block" (click)="delete($event, photo)"> Delete photo! </button>
       </div>
       <div class="col-lg-6 text-center">
         <button class="btn btn-warning btn-block" (click)="edit()"> Edit photo! </button>
+      </div>
+    </div>
+    <div class="row my-3" *ngIf="!isUserCreator">
+      <div class="col-lg-12 text-center">
+        <button class="btn btn-success btn-block" (click)="likePhoto()"> Like photo! </button>
       </div>
     </div>
     <!-- /isUserCreator buttons -->

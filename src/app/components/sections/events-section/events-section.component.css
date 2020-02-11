@@ -24,11 +24,16 @@
     overflow: hidden;
 }
 
+.card-title {
+    height: 30px;
+    overflow: hidden;
+}
+
 .card:hover {
     cursor: pointer;
 }
 
 .card-footer {
-    font-weight: 500;
-    font-size: 1.4rem;
+    font-weight: bold;
+    font-size: 1rem;
 }

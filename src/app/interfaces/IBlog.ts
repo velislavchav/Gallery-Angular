@@ -5,4 +5,5 @@ export interface IBlog {
     date: string;
     imageUrl: string;
     author: string;
+    authorId: string;
 }

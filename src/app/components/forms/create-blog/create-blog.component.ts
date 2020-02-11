@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BlogService } from 'src/app/services/blog.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { Subscription } from 'rxjs';
 
 function getDate() {
   let today: any = new Date();
@@ -24,8 +25,10 @@ function getDate() {
   templateUrl: '../form-template/createForm.component.html',
   styleUrls: ['../form-template/createForm.component.css']
 })
-export class CreateBlogComponent {
+export class CreateBlogComponent implements OnDestroy{
   title = 'Create Blog';
+  subscriber: Subscription;
+  user: string;
   categories: Array<string> = ['Informative', 'Reportage', 'News', 'Interview', 'Research', 'Personal commentary']
   form: FormGroup;
 
@@ -40,10 +43,19 @@ export class CreateBlogComponent {
 
   onSubmit() {
     const userId = this.authService.getUserId();
-    this.form.value['author'] = userId;
-    this.form.value['date'] = getDate();
-    this.blogService.addBlog(this.form.value);
-    this.router.navigate(['/section', 'blog']);
+    this.subscriber = this.authService.getUser(userId).subscribe(data => {
+      this.user = data.name;
+      this.form.value['authorId'] = userId;
+      this.form.value['author'] = this.user;
+      this.form.value['date'] = getDate();
+      this.blogService.addBlog(this.form.value);
+      this.router.navigate(['/section', 'blog']); 
+    })
   }
 
+  ngOnDestroy() {
+    if(this.subscriber) {
+      this.subscriber.unsubscribe();
+    }
+  }
 }

@@ -3,17 +3,14 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { IUser } from '../interfaces/IUser';
-import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // private _isAuth = !!localStorage.getItem('email');
-  isAuthChanged = new Subject<boolean>();
-
   constructor(
     private dbAuth: AngularFireAuth,
     private afDb: AngularFirestore,
@@ -22,27 +19,7 @@ export class AuthService {
   ) { }
 
   isAuth() {
-    // return this._isAuth;
-    return localStorage.getItem('email') !== null;
-  }
-
-  initializeAuthState() {
-    // if(localStorage.getItem('email')) {
-    //   this._isAuth = true;
-    //   this.isAuthChanged.next(true);
-    // } else {
-    //   this._isAuth = false;
-    //   this.isAuthChanged.next(false);
-    // }
-    this.dbAuth.authState.subscribe((userState) => {
-      if (userState) {
-        // this._isAuth = true;
-        this.isAuthChanged.next(true);
-      } else {
-        // this._isAuth = false;
-        this.isAuthChanged.next(false);
-      }
-    });
+    return !!localStorage.getItem('email');
   }
 
   signUp(email: string, password: string, phone: string, name: string) {
@@ -61,11 +38,11 @@ export class AuthService {
   signIn(email: string, password: string) {
     this.dbAuth.auth
       .signInWithEmailAndPassword(email, password)
-      .then(data => {
+      .then(async (data) => {
         localStorage.setItem('email', data.user.email);
         this.toastr.success("Successfully logged in!", "Success");
-        this.router.navigate(["/"]);
-        this.initializeAuthState();
+        await this.router.navigate(["/"]);
+        await location.reload();
       })
       .catch(err => {
         this.toastr.error(err, "Error");
@@ -80,9 +57,10 @@ export class AuthService {
       uid: user.uid,
       name: user.name,
       email: user.email,
-      phone: user.phone
+      phone: user.phone,
+      likedPhotos: [],
+      enrolledEvents: [],
     };
-
     return userRef.set(data);
   }
 
@@ -98,11 +76,11 @@ export class AuthService {
 
   logout() {
     this.dbAuth.auth.signOut()
-      .then(() => {
+      .then(async () => {
         localStorage.clear();
         this.toastr.success("Successfully logged out!", "Success");
-        this.router.navigate(["/home"]);
-        location.reload();
+        await this.router.navigate(["/home"]);
+        await location.reload();
       })
       .catch(err => {
         this.toastr.error(err, "Error");
@@ -110,26 +88,28 @@ export class AuthService {
   }
 
   getUserId() {
-    return this.dbAuth.auth.currentUser ? this.dbAuth.auth.currentUser.uid : "";
-  }
-
-  getAuthorName(id: string) {
-    // let docRef = this.afDb.collection("users").doc(id);
-    // docRef.subscribe(function (doc) {
-    //   if (doc.exists) {
-    //     console.log("Document data:", doc.data());
-    //   } else {
-    //     // doc.data() will be undefined in this case
-    //     console.log("No such document!");
+    // let allUsersDocs: Array<string> = [];
+    // this.afDb.collection('users').get().toPromise().then(data =>
+    //   data.docs.forEach(doc => {
+    //     allUsersDocs.push(doc.id)
+    //   })
+    // ).then(() => {
+    //   for (let i = 0; i < allUsersDocs.length; i++) {
+    //     const docId = allUsersDocs[i];
+    //     this.afDb.doc<IUser>(`users/${docId}`).snapshotChanges().pipe(
+    //       first(x => x.payload.data().email === localStorage.getItem('email'))
+    //     ).subscribe(x => {
+    //       if(!!x.payload.id !== false) {
+    //         window.document['curUsrId'] = x.payload.id;
+    //       }
+    //     })
     //   }
-    // }).catch(function (error) {
-    //   console.log("Error getting document:", error);
-    // });
-
-  //   return this.userRef.valueChanges().subscribe(item => {
-  //     console.log(item);
-  //     return item;
-  // });
-
+    // })
+    if(this.dbAuth.auth.currentUser) {
+      return this.dbAuth.auth.currentUser.uid;
+    } else {
+      this.router.navigate(['/home']);
+      return null;
+    }
   }
 }

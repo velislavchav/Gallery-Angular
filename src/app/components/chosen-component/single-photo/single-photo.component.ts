@@ -11,21 +11,24 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SinglePhotoComponent implements OnInit {
   photo: IPhoto;
-  isUserCreator: boolean = false;
+  isUserCreator: boolean;
   constructor(private route: ActivatedRoute, private galleryService: GalleryService, private authService: AuthService) { }
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
     this.galleryService.loadPhoto(id).then(ph => {
-      this.photo = ph;  
-      if(this.photo.author === this.authService.getUserId()) {
+      this.photo = ph;
+      this.photo['id'] = id;
+      if(this.photo.authorId === this.authService.getUserId()) {
         this.isUserCreator = true;
+      } else {
+        this.isUserCreator = false;
       }
     });
   }
 
-  delete() {
-    // this.galleryService.deletePhoto(item);
+  delete(event, photo) {
+    this.galleryService.deletePhoto(photo);
   }
 
 }

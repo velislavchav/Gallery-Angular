@@ -1,29 +1,27 @@
-<!-- <ng-template [ngIf]="!blogs">
+<ng-template [ngIf]="!blogs">
   <app-loader></app-loader>
-</ng-template> -->
+</ng-template>
 
 <ng-template [ngIf]="blogs">
-<div class="container">
-  <div class="text-center">
-    <h1>Blog</h1>
-  </div>
   <div class="container">
-    <div class="card-columns">
-      <div class="card" *ngFor="let blog of blogs">
-        <a routerLink="/section/blog/{{blog.id}}">
-          <img class="card-img-top" src="{{blog.imageUrl}}" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">{{ blog.title }}</h5>
-            <p class="card-text descript">
-              {{ blog.description }}
-            </p>
-            <p class="card-text"><small class="text-muted">
-                <i class="far fa-user"></i>author {{blog.author}}<i class="fas fa-calendar-alt">|</i> date
-                {{ blog.date }}</small></p>
-          </div>
-        </a>
+    <h1 class="text-center"> Blog </h1>
+    <div class="container">
+      <div class="card-columns">
+        <div class="card" *ngFor="let blog of blogs">
+          <a routerLink="/section/blog/{{blog.id}}">
+            <img class="card-img-top" src="{{blog.imageUrl}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"> • {{ blog.title }} •</h5>
+              <p class="card-text descript">
+                {{ blog.description }}
+              </p>
+              <p class="card-text"><small class="text-muted">
+                  <i class="far fa-user"></i>author {{blog.author}}<i class="fas fa-calendar-alt">|</i> date
+                  {{ blog.date }}</small></p>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </ng-template>

@@ -14,20 +14,21 @@ export class NavigationComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    if (this.authService.isAuth()) {
+    this.isAuthSub = this.authService.isAuthChanged.subscribe((data) => {
+      this.isAuth = data;
+    });
+    
+    if (this.authService.isAuth) {
       this.isAuth = true;
-    } else {
-      // this.isAuthSub = this.authService.isAuthChanged.subscribe(x => {
-        this.isAuth = false;
-      // });
     }
-  }
+  
+}
 
-  ngOnDestroy() {
-    // this.isAuthSub.unsubscribe();
-  }
+ngOnDestroy() {
+  this.isAuthSub.unsubscribe();
+}
 
-  tryLogout() {
-    this.authService.logout();
-  }
+tryLogout() {
+  this.authService.logout();
+}
 }

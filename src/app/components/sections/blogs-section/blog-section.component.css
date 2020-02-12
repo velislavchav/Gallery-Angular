@@ -30,3 +30,8 @@ a:hover {
   height: 50px;
   overflow: hidden;
 }
+
+img{
+  height:250px;
+  width:100%;
+}

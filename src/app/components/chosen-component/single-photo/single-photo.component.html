@@ -11,12 +11,11 @@
       <div class="col-lg-9">
         <img class="img-fluid rounded" src="{{photo.imageUrl}}" alt="image">
       </div>
-      <div class="my-5 py-4 text-center col-lg-3 body-card">
+      <div class="body-card my-5 py-4 text-center col-lg-3">
         <h5 class="py-2"> Description: </h5>
         <p> {{photo.description}} </p>
         <small class="text-secondary">photo by {{photo.author}}</small> <br>
         <small class="text-secondary">{{photo.category}} category </small>
-
       </div>
     </div>
     <!-- isUserCreator buttons -->
@@ -37,7 +36,8 @@
     <!-- /.row -->
     <div class="row my-3">
       <div class="text-center col-lg-12">
-        <button class="btn btn-primary btn-lg btn-block" routerLink="/section/gallery"> Back to gallery section! </button>
+        <button class="btn btn-primary btn-lg btn-block" routerLink="/section/gallery"> Back to gallery section!
+        </button>
       </div>
     </div>
   </div>

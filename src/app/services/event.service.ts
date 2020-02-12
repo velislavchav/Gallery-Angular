@@ -3,7 +3,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { IEvent } from '../interfaces/IEvent';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -42,7 +41,7 @@ export class EventService {
       this.toastr.success('Successfully enrolled for the event', 'Success');
       this.router.navigate(['/home']);
     })
-      .catch(err => {
+      .catch(() => {
         this.toastr.error('Error enrolling for the event', 'Error');
         this.router.navigate(['/home']);
       });
@@ -59,7 +58,7 @@ export class EventService {
       this.toastr.success('Successfully unenrolled for the event', 'Success');
       this.router.navigate(['/home']);
     })
-      .catch(err => {
+      .catch(() => {
         this.toastr.error('Couldnt unenroll for the event', 'Error');
         this.router.navigate(['/home']);
       });

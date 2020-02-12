@@ -3,14 +3,16 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { IUser } from '../interfaces/IUser';
-import { Observable } from 'rxjs';
-import { map, first } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  isAuthChanged = new Subject<boolean>(); //
+
   constructor(
     private dbAuth: AngularFireAuth,
     private afDb: AngularFirestore,
@@ -18,14 +20,24 @@ export class AuthService {
     private toastr: ToastrService,
   ) { }
 
-  isAuth() {
+  get isAuth() {
     return !!localStorage.getItem('email');
+  }
+
+  initializeAuthState() {
+    this.dbAuth.authState.subscribe(() => {
+      if(!!localStorage.getItem('email')) {
+        this.isAuthChanged.next(true);
+      } else {
+        this.isAuthChanged.next(false);
+      }
+    });
   }
 
   signUp(email: string, password: string, phone: string, name: string) {
     this.dbAuth.auth
       .createUserWithEmailAndPassword(email, password)
-      .then(data => {
+      .then(() => {
         this.pushUserData({ email, name, phone });
         this.toastr.success("Successfully registered!", "Success");
         this.router.navigate(["/user/login"]);
@@ -38,11 +50,12 @@ export class AuthService {
   signIn(email: string, password: string) {
     this.dbAuth.auth
       .signInWithEmailAndPassword(email, password)
-      .then(async (data) => {
+      .then((data) => {
+        this.router.navigate(["/"]);
         localStorage.setItem('email', data.user.email);
         this.toastr.success("Successfully logged in!", "Success");
-        await this.router.navigate(["/"]);
-        await location.reload();
+        this.initializeAuthState()
+        // location.reload();
       })
       .catch(err => {
         this.toastr.error(err, "Error");
@@ -76,11 +89,11 @@ export class AuthService {
 
   logout() {
     this.dbAuth.auth.signOut()
-      .then(async () => {
+      .then(() => {
         localStorage.clear();
+        this.router.navigate(["/home"]);
         this.toastr.success("Successfully logged out!", "Success");
-        await this.router.navigate(["/home"]);
-        await location.reload();
+        location.reload();
       })
       .catch(err => {
         this.toastr.error(err, "Error");
@@ -88,23 +101,6 @@ export class AuthService {
   }
 
   getUserId() {
-    // let allUsersDocs: Array<string> = [];
-    // this.afDb.collection('users').get().toPromise().then(data =>
-    //   data.docs.forEach(doc => {
-    //     allUsersDocs.push(doc.id)
-    //   })
-    // ).then(() => {
-    //   for (let i = 0; i < allUsersDocs.length; i++) {
-    //     const docId = allUsersDocs[i];
-    //     this.afDb.doc<IUser>(`users/${docId}`).snapshotChanges().pipe(
-    //       first(x => x.payload.data().email === localStorage.getItem('email'))
-    //     ).subscribe(x => {
-    //       if(!!x.payload.id !== false) {
-    //         window.document['curUsrId'] = x.payload.id;
-    //       }
-    //     })
-    //   }
-    // })
     if(this.dbAuth.auth.currentUser) {
       return this.dbAuth.auth.currentUser.uid;
     } else {

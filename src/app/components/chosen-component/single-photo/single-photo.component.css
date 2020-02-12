@@ -6,3 +6,8 @@
 .body-card {
     border: 1px solid black;
 }
+
+img {
+    height: 100%;
+    width: 100%;
+}

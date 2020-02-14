@@ -16,10 +16,10 @@ body {
 
 .create-card .top {
     position: relative;
-    height: 570px;
+    height: 100%;
     width: 100%;
     overflow: hidden;
-    background: url("https://s-media-cache-ak0.pinimg.com/564x/cf/1e/c4/cf1ec4b0c96e59657a46867a91bb0d1e.jpg") no-repeat;
+    /* background: url("https://s-media-cache-ak0.pinimg.com/564x/cf/1e/c4/cf1ec4b0c96e59657a46867a91bb0d1e.jpg") no-repeat; */
     background-size: cover;
     background-position: center center;
     text-align: center;
@@ -102,16 +102,5 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.7);
-}
-
-.create-card .top:hover {
-    background-color: yellow;
-}
-
-
-.create-card.rain .top {
-    background: url("http://img.freepik.com/free-vector/girl-with-umbrella_1325-5.jpg?size=338&ext=jpg") no-repeat;
-    background-size: cover;
-    background-position: center center;
+    background: rgba(0, 0, 0, 0.5);
 }

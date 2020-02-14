@@ -1,13 +1,13 @@
 <div class="container">
     <div class="row">
         <!-- Col -->
-        <div class="col-lg-4">
+        <div class="col-lg-6" *ngFor="let selection of templateInfo">
             <a class="select-create" routerLink="blog">
                 <div class="create-card rain">
-                    <div class="top">
+                    <div class="top" [ngStyle]="{'background':'url(' + selection.imageUrl + ') no-repeat center'}">
                         <div class="wrapper">
                             <p class="title">
-                                <span class="title-value">Create blog</span>
+                                <span class="title-value">Create {{selection.title}}</span>
                             </p>
                         </div>
                     </div>
@@ -15,31 +15,6 @@
             </a>
         </div>
         <!-- /Col -->
-        <!-- Col -->
-        <div class="col-lg-4">
-            <div class="create-card rain">
-                <div class="top">
-                    <div class="wrapper">
-                        <p class="title">
-                            <span class="title-value">Create blog</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /Col -->
-        <!-- Col -->
-        <div class="col-lg-4">
-            <div class="create-card rain">
-                <div class="top">
-                    <div class="wrapper">
-                        <p class="title">
-                            <span class="title-value">Create blog</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /Col -->
+       
     </div>
 </div>

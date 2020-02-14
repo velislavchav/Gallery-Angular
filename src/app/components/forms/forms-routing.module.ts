@@ -6,7 +6,7 @@ import { AuthGuard } from '../../services/auth.guard';
 
 const formsRoute: Routes = [
     {
-        path: 'create',
+        path: 'section/create',
         canActivate: [AuthGuard],
         children: [
             {

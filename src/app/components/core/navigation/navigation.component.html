@@ -1,5 +1,5 @@
 <!-- <div> -->
-<nav class="nav affix"> 
+<nav class="nav affix">
     <div class="container">
         <div class="logo">
             <a routerLink="/home">
@@ -13,10 +13,10 @@
                 <li *ngIf="isAuth"><a routerLink="/section/events">Events</a></li>
                 <li *ngIf="!isAuth"><a routerLink="/user/register">Register</a></li>
                 <li *ngIf="!isAuth"><a routerLink="/user/login">Login</a></li>
-                <li *ngIf="isAuth"><a routerLink="/user/profile">Profile</a></li>
-                <li *ngIf="isAuth"><a routerLink="/create/photo">Create photo</a></li>
-                <li *ngIf="isAuth"><a routerLink="/create/blog">Create blog</a></li>
+                <!-- <li *ngIf="isAuth"><a routerLink="/section/create/photo">Create photo</a></li>
+                    <li *ngIf="isAuth"><a routerLink="/section/create/blog">Create blog</a></li> -->
                 <li *ngIf="isAuth"><a routerLink="/section/create">Create</a></li>
+                <li *ngIf="isAuth"><a routerLink="/user/profile">Profile</a></li>
 
                 <li *ngIf="isAuth"><a type="button" (click)="tryLogout()">Logout</a></li>
             </ul>

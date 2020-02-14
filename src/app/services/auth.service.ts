@@ -91,8 +91,8 @@ export class AuthService {
     this.dbAuth.auth.signOut()
       .then(() => {
         localStorage.clear();
-        this.router.navigate(["/home"]);
         this.toastr.success("Successfully logged out!", "Success");
+        this.router.navigate(["/home"]);
         location.reload();
       })
       .catch(err => {

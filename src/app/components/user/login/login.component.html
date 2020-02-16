@@ -8,8 +8,20 @@
                     <div class="input-group">
                         <input class="input--style-3" type="email" placeholder="Email" formControlName="email">
                     </div>
+                    <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.email.errors?.required && f.email.touched">
+                        <strong>Warning!</strong> Email is required. 
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.email.errors?.pattern && f.email.touched">
+                        <strong>Warning!</strong> Email is not valid. 
+                    </div>
                     <div class="input-group">
                         <input class="input--style-3" type="password" placeholder="Password" formControlName="password">
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.password.errors?.required && f.password.touched">
+                        <strong>Warning!</strong> Password is required. 
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.password.errors?.minlength && f.password.touched">
+                        <strong>Warning!</strong> Password is min 4 characters. 
                     </div>
                     <div class="p-t-10">
                         <button class="btn btn--pill btn--green" type="submit" [disabled]="loginForm.invalid">Submit</button>

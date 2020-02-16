@@ -2,7 +2,7 @@
     <div class="row">
         <!-- Col -->
         <div class="col-lg-6" *ngFor="let selection of templateInfo">
-            <a class="select-create" routerLink="blog">
+            <a class="select-create" routerLink="{{selection.title}}">
                 <div class="create-card rain">
                     <div class="top" [ngStyle]="{'background':'url(' + selection.imageUrl + ') no-repeat center'}">
                         <div class="wrapper">

@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, PatternValidator } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 function passwordsMatch(c: AbstractControl) {
-  // if(c.value.password != c.value.repeatPassword) {
-  //   this.toastr.warning("Passwords should be the same!", "Warning");
-  // }
   return c.value.password === c.value.repeatPassword ? null : { passwordsMatch: true }
 }
 
@@ -17,10 +14,12 @@ function passwordsMatch(c: AbstractControl) {
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  usernameRegexPattern: RegExp = /^([a-zA-Z]{2,}\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
+  emailRegexPattern: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   constructor(fb: FormBuilder, private authService: AuthService, private toastr: ToastrService) {
     this.registerForm = fb.group({
-      name: ['', [Validators.required, Validators.minLength(4)]],
-      email: ['', [Validators.required, Validators.email]],
+      name: ['', [Validators.required, Validators.pattern(this.usernameRegexPattern)]],
+      email: ['', [Validators.required, Validators.pattern(this.emailRegexPattern)]],
       passwords: fb.group({
         password: ['', [Validators.required, Validators.minLength(4)]],
         repeatPassword: ['', [Validators.required, Validators.minLength(4)]],
@@ -37,9 +36,7 @@ export class RegisterComponent {
     this.authService.signUp(email, password, phone, name);
   }
 
-  // passwordsMatch(c: AbstractControl) {
-  //   if(c.value.password === c.value.repeatPassword) {
-  //     this.toastr.warning("Passwords should be the same!", "Warning");
-  //   }
-  // }
+  get f() {
+    return this.registerForm.controls;
+  }
 }

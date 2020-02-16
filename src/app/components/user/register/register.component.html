@@ -5,15 +5,24 @@
                 <h2 class="title">Registration</h2>
                 <form (ngSubmit)="tryRegister()" [formGroup]="registerForm">
                     <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Full Name" formControlName="name">
+                        <input class="input--style-3" type="text" placeholder="Names" formControlName="name">
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.name.errors?.required && f.name.touched">
+                        <strong>Warning!</strong> Username is required. 
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.name.errors?.pattern && f.name.touched">
+                        <strong>Warning!</strong> Enter first name and last name. 
                     </div>
                     <div>
                         <div class="input-group">
                             <input class="input--style-3" type="email" placeholder="Email" formControlName="email">
                         </div>
-                        <!-- <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">
-                            <strong>Warning!</strong> Valid email is required.
-                        </div> -->
+                        <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.email.errors?.required && f.email.touched">
+                            <strong>Warning!</strong> Email is required. 
+                        </div>
+                        <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.email.errors?.pattern && f.email.touched">
+                            <strong>Warning!</strong> Email is not valid. 
+                        </div>
                     </div>
                     <div formGroupName="passwords">
                         <div class="input-group">
@@ -24,12 +33,18 @@
                             <input class="input--style-3" type="password" placeholder="Re-password"
                                 formControlName="repeatPassword" (onTouch)="passwordsMatch()">
                         </div>
-                        <!-- <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="registerForm.get('passwords')?.errors?.passwordsMatch && registerForm.get('passwords').touched">
+                        <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.passwords.errors?.passwordsMatch && f.passwords.touched">
                             <strong>Warning!</strong> Passwords are not matched.
-                        </div> -->
+                        </div> 
                     </div>
                     <div class="input-group">
                         <input class="input--style-3" type="text" placeholder="Phone number" formControlName="phone">
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.phone.errors?.required && f.phone.touched">
+                        <strong>Warning!</strong> Phone is required.
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="(f.phone.errors?.minlength || f.phone.errors?.maxlength) && f.phone.touched">
+                        <strong>Warning!</strong> Phone should be 10 characters.
                     </div>
                     <div class="p-t-10">
                         <button class="btn btn--pill btn--green" type="submit" [disabled]="registerForm.invalid">Submit</button>

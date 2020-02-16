@@ -109,4 +109,18 @@ export class GalleryService {
       this.router.navigate(['/home']);
     });
   }
+
+  loadOwnPhotos(userId) {
+    return this.db.collection('gallery').snapshotChanges().pipe(
+      map(changes => {
+        return changes.map(ph => {
+          const data = ph.payload.doc.data() as IPhoto;
+          data.id = ph.payload.doc.id;
+          if(data.authorId === userId) {
+            return data;
+          }
+        })
+      }),
+    )
+  }
 }

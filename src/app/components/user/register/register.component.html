@@ -4,50 +4,73 @@
             <div class="card-body">
                 <h2 class="title">Registration</h2>
                 <form (ngSubmit)="tryRegister()" [formGroup]="registerForm">
-                    <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Names" formControlName="name">
+                    <div id="names-container">
+                        <div class="input-group">
+                            <input class="input--style-3" type="text" placeholder="Names" formControlName="name">
+                        </div>
+                        <div class="alert alert-danger alert-dismissible fade show errs"
+                            *ngIf="f.name.errors?.required && f.name.touched">
+                            <strong>Warning!</strong> Username is required.
+                        </div>
+                        <div class="alert alert-danger alert-dismissible fade show errs"
+                            *ngIf="f.name.errors?.pattern && f.name.touched">
+                            <strong>Warning!</strong> Enter first name and last name.
+                        </div>
                     </div>
-                    <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.name.errors?.required && f.name.touched">
-                        <strong>Warning!</strong> Username is required. 
-                    </div>
-                    <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.name.errors?.pattern && f.name.touched">
-                        <strong>Warning!</strong> Enter first name and last name. 
-                    </div>
-                    <div>
+                    <div id="email-container">
                         <div class="input-group">
                             <input class="input--style-3" type="email" placeholder="Email" formControlName="email">
                         </div>
-                        <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.email.errors?.required && f.email.touched">
-                            <strong>Warning!</strong> Email is required. 
+                        <div class="alert alert-danger alert-dismissible fade show errs"
+                            *ngIf="f.email.errors?.required && f.email.touched">
+                            <strong>Warning!</strong> Email is required.
                         </div>
-                        <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.email.errors?.pattern && f.email.touched">
-                            <strong>Warning!</strong> Email is not valid. 
+                        <div class="alert alert-danger alert-dismissible fade show errs"
+                            *ngIf="f.email.errors?.pattern && f.email.touched">
+                            <strong>Warning!</strong> Email is not valid.
                         </div>
                     </div>
-                    <div formGroupName="passwords">
+                    <div formGroupName="passwords" id="passwords-container">
                         <div class="input-group">
                             <input class="input--style-3" type="password" placeholder="Password"
                                 formControlName="password">
+                        </div>
+                        <div class="alert alert-danger alert-dismissible fade show errs"
+                            *ngIf="f.passwords.controls.password.errors?.minlength && f.passwords.controls.password.touched">
+                            <strong>Warning!</strong> Passwords min length is 4 chars.
                         </div>
                         <div class="input-group">
                             <input class="input--style-3" type="password" placeholder="Re-password"
                                 formControlName="repeatPassword" (onTouch)="passwordsMatch()">
                         </div>
-                        <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.passwords.errors?.passwordsMatch && f.passwords.touched">
+                        <div class="alert alert-danger alert-dismissible fade show errs"
+                            *ngIf="f.passwords.errors?.passwordsMatch && f.passwords.touched">
                             <strong>Warning!</strong> Passwords are not matched.
-                        </div> 
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Phone number" formControlName="phone">
+                    <div id="phone-container">
+                        <div class="input-group">
+                            <input class="input--style-3" type="text" placeholder="Phone number"
+                                formControlName="phone">
+                        </div>
+                        <div class="alert alert-danger alert-dismissible fade show errs"
+                            *ngIf="f.phone.errors?.required && f.phone.touched">
+                            <strong>Warning!</strong> Phone is required.
+                        </div>
+                        <div class="alert alert-danger alert-dismissible fade show errs"
+                            *ngIf="(f.phone.errors?.minlength || f.phone.errors?.maxlength) && f.phone.touched">
+                            <strong>Warning!</strong> Phone should be 10 characters.
+                        </div>
                     </div>
-                    <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="f.phone.errors?.required && f.phone.touched">
-                        <strong>Warning!</strong> Phone is required.
-                    </div>
-                    <div class="alert alert-danger alert-dismissible fade show errs" *ngIf="(f.phone.errors?.minlength || f.phone.errors?.maxlength) && f.phone.touched">
-                        <strong>Warning!</strong> Phone should be 10 characters.
+                    <div id="user-image-container">
+                        <div class="input-group">
+                            <input class="input--style-3" type="text" placeholder="Profile image address"
+                                formControlName="profileImage">
+                        </div>
                     </div>
                     <div class="p-t-10">
-                        <button class="btn btn--pill btn--green" type="submit" [disabled]="registerForm.invalid">Submit</button>
+                        <button class="btn btn--pill btn--green" type="submit"
+                            [disabled]="registerForm.invalid">Submit</button>
                     </div>
                 </form>
             </div>

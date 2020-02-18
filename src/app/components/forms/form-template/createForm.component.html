@@ -7,9 +7,18 @@
             <div class="card-body">
                 <form (ngSubmit)="onSubmit()" [formGroup]="form">
                     <div class="form-row">
-                        <div class="value">
+                        <div class="value text-center">
                             <div class="input-group">
                                 <input class="input--style-5" placeholder="Title" type="text" formControlName="title">
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show errs mt-2" *ngIf="f.title.errors?.required && f.title.touched">
+                                <strong>Warning!</strong> Title is required. 
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show errs mt-2" *ngIf="f.title.errors?.minlength && f.title.touched">
+                                <strong>Warning!</strong> Title min length is 3 characters. 
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show errs mt-2" *ngIf="f.title.errors?.maxlength && f.title.touched">
+                                <strong>Warning!</strong> Title max length is 25 characters. 
                             </div>
                         </div>
                     </div>
@@ -19,18 +28,29 @@
                         </select>
                     </div>
                     <div class="form-row">
-                        <div class="value">
+                        <div class="value text-center">
                             <div class="input-group">
-                                <input class="input--style-5" placeholder="Image address" type="text"
-                                    formControlName="imageUrl">
+                                <input class="input--style-5" placeholder="Image address" type="text" formControlName="imageUrl">
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show errs mt-2" *ngIf="f.imageUrl.errors?.required && f.imageUrl.touched">
+                                <strong>Warning!</strong> Image address is required. 
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show errs mt-2" *ngIf="f.imageUrl.errors?.minlength && f.imageUrl.touched">
+                                <strong>Warning!</strong> Image address min length is 4 characters. 
                             </div>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="value">
+                        <div class="value text-center">
                             <div class="input-group">
                                 <input class="input--style-5" placeholder="Description" type="text"
                                     formControlName="description">
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show errs mt-2" *ngIf="f.description.errors?.required && f.description.touched">
+                                <strong>Warning!</strong> Description is required. 
+                            </div>
+                            <div class="alert alert-danger alert-dismissible fade show errs mt-2" *ngIf="f.description.errors?.minlength && f.description.touched">
+                                <strong>Warning!</strong> Description min length is 20 characters. 
                             </div>
                         </div>
                     </div>

@@ -25,6 +25,7 @@ export class RegisterComponent {
         repeatPassword: ['', [Validators.required, Validators.minLength(4)]],
       }, { validators: [passwordsMatch] }),
       phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      profileImage: ['']
     })
   }
 
@@ -33,7 +34,9 @@ export class RegisterComponent {
     const email = this.registerForm.value.email;
     const password = this.registerForm.value.passwords.password;
     const phone = this.registerForm.value.phone;
-    this.authService.signUp(email, password, phone, name);
+    let profileImage = this.registerForm.value.profileImage;
+    profileImage === '' ? profileImage = 'https://www.upv.edu.ph/images/2019/06/07/no-profile.png' : '';
+    this.authService.signUp(email, password, phone, name, profileImage);
   }
 
   get f() {

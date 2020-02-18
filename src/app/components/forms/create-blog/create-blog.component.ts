@@ -37,7 +37,7 @@ export class CreateBlogComponent implements OnDestroy{
       title: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(3)]],
       category: [this.categories[0], [Validators.required]],
       imageUrl: ['', [Validators.required, Validators.minLength(4)]],
-      description: ['', [Validators.required, Validators.minLength(4)]],
+      description: ['', [Validators.required, Validators.minLength(20)]],
     })
   }
 
@@ -54,8 +54,10 @@ export class CreateBlogComponent implements OnDestroy{
   }
 
   ngOnDestroy() {
-    if(this.subscriber) {
-      this.subscriber.unsubscribe();
-    }
+    this.subscriber ? this.subscriber.unsubscribe() : "";  
+  }
+
+  get f() {
+    return this.form.controls;
   }
 }

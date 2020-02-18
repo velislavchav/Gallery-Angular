@@ -5,22 +5,30 @@
 <div class="container" *ngIf="currentUser">
     <div class="row my-2">
         <div class="col-lg-8 order-lg-2 text-center py-4">
-            <h5 class="mb-3">User Profile</h5>
-            <div class="row">
-                <div class="col-md-12">
+            <h5 class="mb-3"> User Profile </h5>
+            <div class="row pt-4">
+                <div class="col-md-4 border border-top-0 border-bottom-0 border-secondary">
                     <h6>Name</h6>
                     <p>
                         {{currentUser.name}}
                     </p>
-                    <h6>About</h6>
+                </div>
+                <div class="col-md-4 border border-top-0 border-bottom-0 border-secondary">
+                    <h6>Email</h6>
                     <p>
-                        Web Designer, UI/UX Engineer
+                        {{currentUser.email}}
+                    </p>
+                </div>
+                <div class="col-md-4 border border-top-0 border-bottom-0 border-secondary">
+                    <h6>Phone</h6>
+                    <p>
+                        {{currentUser.phone}}
                     </p>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 mt-4 order-lg-1 text-center">
-            <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            <img src="{{currentUser.profileImage}}" class="mx-auto img-fluid img-circle d-block center-cropped" alt="avatar">
             <!-- <h6 class="mt-2">Upload a different photo</h6>
             <label class="custom-file">
                 <input type="file" id="file" class="custom-file-input">

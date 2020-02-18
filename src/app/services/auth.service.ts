@@ -11,8 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class AuthService {
-  isAuthChanged = new Subject<boolean>(); //
-
+  isAuthChanged = new Subject<boolean>();
   constructor(
     private dbAuth: AngularFireAuth,
     private afDb: AngularFirestore,
@@ -34,11 +33,11 @@ export class AuthService {
     });
   }
 
-  signUp(email: string, password: string, phone: string, name: string) {
+  signUp(email: string, password: string, phone: string, name: string, profileImage: string) {
     this.dbAuth.auth
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        this.pushUserData({ email, name, phone });
+        this.pushUserData({ email, name, phone, profileImage });
         this.toastr.success("Successfully registered!", "Success");
         this.router.navigate(["/user/login"]);
       })
@@ -71,6 +70,7 @@ export class AuthService {
       name: user.name,
       email: user.email,
       phone: user.phone,
+      profileImage: user.profileImage,
       likedPhotos: [],
       enrolledEvents: [],
     };

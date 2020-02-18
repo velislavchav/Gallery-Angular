@@ -1,27 +1,35 @@
-# GalleryProject
+# Documentation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
+Public part  | Private part
+------------ | -------------
+Home page | Home page
+Register page | Gallery
+Login page | Photo info
+empty | Blog
+empty | Article info
+empty | Events
+empty | Create article
+empty | Create photo
+empty | Profile
+empty | Logout
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Description:
 
-## Code scaffolding
+For back-end I used FireBase. It's provides a real-time database and back-end as a service. 
+The service provides application developers an API that allows application data to be synchronized across clients and stored on Firebase's cloud.
+If you want to access the private part, you should register and login. In the private part you can see all photos, articles, events and if the logged user created them,
+you can delete it. If anybody else created them, you can like/dislike photo, enroll/unenroll for event and etc.
+In the create page, you can choose what you want to create - article or photo. There are some validations, but please try
+to insert correct data.
+In the profile page you can see your info and the most liked photos (top 3) owned by you, if there are any.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+### Project structure:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+In the source folder I splited the structure to components/interfaces/services(in different folders). You can find FireBase connection data in environment.ts.
 
-## Running unit tests
+### Project setup:
+First of all - don't forget to "npm install" all dependencies when you download the project. After that, you can run the project with "ng serve --open" and make sure port 4200 is free. If you run already something on that port, you can add "--port 4300" to run it to another port.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+#####  Hope you enjoy the project

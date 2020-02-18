@@ -4,7 +4,7 @@ import { EventsSectionComponent } from './events-section/events-section.componen
 import { BlogSectionComponent } from './blogs-section/blog-section.component';
 import { SingleBlogComponent } from '../chosen-component/single-blog/single-blog.component';
 import { SinglePhotoComponent } from '../chosen-component/single-photo/single-photo.component';
-import { AuthGuard } from 'src/app/services/auth.guard';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 import { CreateSectionComponent } from './create-section/create-section.component';
 
 const sectionRoutes: Routes = [

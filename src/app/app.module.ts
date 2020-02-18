@@ -9,6 +9,10 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { UserModule } from './components/user/user.module';
+import { SharedFormsModule } from './components/forms/shared-forms.module';
+import { SectionModule } from './components/sections/sections.module';
+import { AngularFireAuthModule } from '@angular/fire/auth';
  
 // Components
 import { AppComponent } from './app.component';
@@ -16,27 +20,24 @@ import { NavigationComponent } from './components/core/navigation/navigation.com
 import { LandingComponent } from './components/landing/landing.component';
 import { FooterComponent } from './components/core/footer/footer.component';
 import { NotFoundComponent } from './components/others/not-found/not-found.component';
-import { UserModule } from './components/user/user.module';
-
-// Services
 import { SingleBlogComponent } from './components/chosen-component/single-blog/single-blog.component';
-import { LoaderComponent } from './components/others/loader/loader.component';
-import { SharedFormsModule } from './components/forms/shared-forms.module';
-import { SectionModule } from './components/sections/sections.module';
 import { SinglePhotoComponent } from './components/chosen-component/single-photo/single-photo.component';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AuthGuard } from './services/auth.guard';
+import { LoaderComponent } from './components/others/loader/loader.component';
+
+// Guards
+import { AuthGuard } from './guards/auth.guard';
+import { LoginRegisterGuard } from './guards/login-register.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent, //
+    NavigationComponent,
     FooterComponent,
     LandingComponent,
     SingleBlogComponent,
+    SinglePhotoComponent,
     NotFoundComponent,
     LoaderComponent,
-    SinglePhotoComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,9 +55,10 @@ import { AuthGuard } from './services/auth.guard';
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
       progressBar: true,
-    }), // ToastrModule added
+    }),
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, LoginRegisterGuard],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
